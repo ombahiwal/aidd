@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AIDDM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://127.0.0.1:5000/styles">
+</head>
+    
+<body>
+    
+    
+    
+ 
+    
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <h1>AI Driven Disaster Management (Floods)</h1>
+  <h4>The City of Venice</h4> 
+  <p>(Demo)</p>
+</div>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <Center>Venice</Center>
+  <div id="txt"></div>
+</nav>
+
+<div class="container" style="margin-top:30px">
+  <div class="row" >
+    <div class="col-m-1">
+    
+           
+    <div class="progress progress-bar-vertical" align="center">
+    
+  <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="height: 80%;">
+    <span class="sr-only">60% Complete</span>
+  </div>
+</div>
+   
+         <h4 style="color:firebrick">128.10 cm</h4>
+          <p>Realtime Water Level</p>
+    </div>
+    
+      <div class="col-md-1"></div>
+      
+      
+      
+      <div class="col-m-1">
+    <div class="progress progress-bar-vertical" align="center">
+  <div class="progress-bar bg-info progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="height: 80%;">
+    <span class="sr-only">60% Complete</span>
+  </div>
+          </div>
+         <h4 style="color:firebrick">{{val}} cm</h4>
+          <b>Predicted Water Level</b>
+    </div>
+      
+      <div class="col-md-1"></div>
+
+      <div class="col-md-3">
+          Prediction : <b>Normal</b> <br>Predicted Level : <b>{{val}} cm</b>
+
+      </div>
+      
+      <div class="col-m-1"></div>
+      <div class="col-m-2">
+          <h3><a id="weatherlink" target="_blank" href="https://openweathermap.org/city/3173529" style="color: black">Weather Info</a> : <span style="color: green" id="weathermain"></span> </h3>
+         <h5>Current : <span id="temperature"></span> C</h5>
+          <h5>Min : <span id="tempmin"></span> C</h5>
+          <h5>Max : <span id="tempmax"></span> C</h5>
+          <h5>Pressure : <span id="pressure"></span> mb</h5>
+          <h5>Humidity : <span id="humidity"></span> %</h5>
+          <h5>Cloudiness : <span id="cloudiness"></span> %</h5>
+          
+      </div>
+      
+      
+  
+  </div>
+</div>
+    
+    <div class="container">
+    <div class="row">
+   
+        
+    </div>
+    
+    </div>
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <p>Omkar Bahiwal, Final Year Project</p>
+</div>
+
+    
+    </body>
+    
+    <script>
+    
+    var openweatherapikey = "07d1716c2bd3a88b8bdc708c878ef546";
+    //   var cityid = "2643743"; //london
+        var cityid = "3173529"; //venice
+        
+        // set link id
+        document.getElementById("weatherlink").href = "https://openweathermap.org/city/"+cityid;
+        
+        var weatherurl = "http://api.openweathermap.org/data/2.5/weather?id="+cityid+"&"+"appid="+openweatherapikey;
+        
+        // function to make GET requests
+        function Get(yourUrl){
+    var Httpreq = new XMLHttpRequest(); 
+    Httpreq.open("GET",yourUrl,false);
+    Httpreq.send(null);
+    return Httpreq.responseText;          
+        }
+        var json_obj = JSON.parse(Get(weatherurl));
+        console.log(weatherurl);
+        console.log("The Object returned is "+(json_obj.main.temp - 273.15));
+        
+        // Current Temp
+        document.getElementById("temperature").innerHTML = (json_obj.main.temp - 273.15).toFixed(2);
+        // Min Temp
+        document.getElementById("tempmin").innerHTML = (json_obj.main.temp_min - 273.15).toFixed(2);
+        
+        // Max Temp
+        document.getElementById("tempmax").innerHTML = (json_obj.main.temp_max - 273.15).toFixed(2);
+        // Pressure
+        document.getElementById("pressure").innerHTML = (json_obj.main.pressure);
+        
+        // Humidity
+        document.getElementById("humidity").innerHTML = (json_obj.main.humidity);
+        
+        // Cloudiness
+        document.getElementById("cloudiness").innerHTML = (json_obj.clouds.all);
+        
+        // Desc
+        document.getElementById("weathermain").innerHTML = (json_obj.weather[0].main);
+        function startTime() {
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('txt').innerHTML =
+  h + ":" + m + ":" + s;
+  var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+  return i;
+}
+    </script>
+    
+</html>

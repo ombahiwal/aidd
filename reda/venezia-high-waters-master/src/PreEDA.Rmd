@@ -1,0 +1,25 @@
+---
+title: "preEDA"
+output: html_document
+---
+
+
+
+data <- read_csv("../precipitationdata/test3_dataset.csv")
+data[2:20, c(2,3)]
+summary(data)
+
+plot(data[1:100, c(2,3)])
+
+```
+Plotting Linear Regression for Water level Data
+```{r pressure, echo=FALSE}
+
+data_water <- read_csv("../output/venezia.csv")
+summary(data_water)
+plot(data_water[1:100, c(1,2)])
+
+plot(data_water[1:24, c(1,2)],col="red",xlab="Days",ylab="Levels in cms")
+
+
+```
