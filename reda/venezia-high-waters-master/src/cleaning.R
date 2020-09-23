@@ -3,7 +3,7 @@ library(lubridate)
 library(xts)
 
 # Get yearly data about high waters in the Veneze lagoon.
-# We clean the data and combine it to get a final dataset
+# Clean the data and combine it to get a final dataset
 
 
 # Data from http://www.comune.venezia.it/archivio/25419

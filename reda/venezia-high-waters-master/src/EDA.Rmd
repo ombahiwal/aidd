@@ -91,17 +91,17 @@ The mean level:
 mean(venezia_xts)
 ```
 
-We take a look to some graphs
+Graphs - starting with Box Plot
 ```{r}
 boxplot(coredata(venezia_xts))
 ```
 
-To plot all the data is confusing
+All Data Plotted here
 ```{r}
 ts.plot(venezia_xts)
 ```
 
-Let's see one month:
+one month:
 ```{r}
 ts.plot(venezia_xts["2015-01"])
 ```
